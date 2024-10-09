@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/buptgarden/design-pattern-go/abstractfactory"
+	"github.com/buptgarden/design-pattern-go/adapter"
 	"github.com/buptgarden/design-pattern-go/builder"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/prototype"
@@ -67,6 +68,20 @@ func main() {
 	}
 
 	fmt.Scanln()
+
+	client := &adapter.Client{}
+
+	mac := &adapter.Mac{}
+
+	client.InsertLightningConnectorIntoComputer(mac)
+
+	windows := &adapter.Window{}
+
+	windowsAdapter := &adapter.WindowsAdaper{
+		Windows: windows,
+	}
+
+	client.InsertLightningConnectorIntoComputer(windowsAdapter)
 
 }
 

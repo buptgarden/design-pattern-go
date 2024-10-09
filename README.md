@@ -16,3 +16,7 @@ this is a design pattern implement by go language
 
 # prototype
 原型模式，或者说克隆模式。为了让调用者不了解目标类的情况下，复制对象。
+
+
+# adaptor
+适配器是一个简单的结构模式，用于解决存量代码的不兼容问题。使用中间层做双向转化。
