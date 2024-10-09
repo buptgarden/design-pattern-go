@@ -7,6 +7,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/builder"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/prototype"
+	"github.com/buptgarden/design-pattern-go/singleton"
 )
 
 func main() {
@@ -59,6 +60,13 @@ func main() {
 	cloneFolder := folder2.Clone()
 	fmt.Println("\nPrinting hierarchy for clone Folder")
 	cloneFolder.Print("  ")
+
+	for i := 0; i < 30; i++ {
+		// go singleton.GetInstance()
+		go singleton.GetInstance_Once()
+	}
+
+	fmt.Scanln()
 
 }
 
