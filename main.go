@@ -6,6 +6,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/abstractfactory"
 	"github.com/buptgarden/design-pattern-go/builder"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
+	"github.com/buptgarden/design-pattern-go/prototype"
 )
 
 func main() {
@@ -37,6 +38,27 @@ func main() {
 	iglooHouse := director.BuildHouse()
 
 	printHouseDetails(iglooHouse)
+
+	file1 := &prototype.File{Name: "file1"}
+	file2 := &prototype.File{Name: "file2"}
+	file3 := &prototype.File{Name: "file3"}
+
+	folder1 := &prototype.Folder{
+		Children: []prototype.Inode{file1},
+		Name:     "Folder1",
+	}
+
+	folder2 := &prototype.Folder{
+		Children: []prototype.Inode{folder1, file2, file3},
+		Name:     "Folder2",
+	}
+
+	fmt.Println("\nPrinting hierarchy for Folder2")
+	folder2.Print("  ")
+
+	cloneFolder := folder2.Clone()
+	fmt.Println("\nPrinting hierarchy for clone Folder")
+	cloneFolder.Print("  ")
 
 }
 
