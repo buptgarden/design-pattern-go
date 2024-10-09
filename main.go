@@ -5,6 +5,7 @@ import (
 
 	"github.com/buptgarden/design-pattern-go/abstractfactory"
 	"github.com/buptgarden/design-pattern-go/adapter"
+	"github.com/buptgarden/design-pattern-go/bridge.go"
 	"github.com/buptgarden/design-pattern-go/builder"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/prototype"
@@ -12,12 +13,33 @@ import (
 )
 
 func main() {
+	factoryMethod()
 
+	abstractFactory()
+
+	builderChapter()
+
+	prototypeChapter()
+
+	singletonChapter()
+
+	adapterChapter()
+
+	bridgeChapter()
+
+}
+
+// chapt worker
+
+func factoryMethod() {
 	ak47, _ := factorymethod.GetGun("ak47")
 	musket, _ := factorymethod.GetGun("musket")
 
 	printDetails(ak47)
 	printDetails(musket)
+}
+
+func abstractFactory() {
 
 	adidasFactory, _ := abstractfactory.GetSportsFactory("adidas")
 	nikeFactor, _ := abstractfactory.GetSportsFactory("nike")
@@ -27,7 +49,9 @@ func main() {
 
 	printShoeDetails(nikeFactor.MakeShoe())
 	printShirtDetails(nikeFactor.MakeShirt())
+}
 
+func builderChapter() {
 	normalBuilder := builder.GetBuilder("normal")
 	iglooBuilder := builder.GetBuilder("igloo")
 
@@ -40,7 +64,9 @@ func main() {
 	iglooHouse := director.BuildHouse()
 
 	printHouseDetails(iglooHouse)
+}
 
+func prototypeChapter() {
 	file1 := &prototype.File{Name: "file1"}
 	file2 := &prototype.File{Name: "file2"}
 	file3 := &prototype.File{Name: "file3"}
@@ -61,14 +87,18 @@ func main() {
 	cloneFolder := folder2.Clone()
 	fmt.Println("\nPrinting hierarchy for clone Folder")
 	cloneFolder.Print("  ")
+}
 
+func singletonChapter() {
 	for i := 0; i < 30; i++ {
 		// go singleton.GetInstance()
 		go singleton.GetInstance_Once()
 	}
 
 	fmt.Scanln()
+}
 
+func adapterChapter() {
 	client := &adapter.Client{}
 
 	mac := &adapter.Mac{}
@@ -82,8 +112,33 @@ func main() {
 	}
 
 	client.InsertLightningConnectorIntoComputer(windowsAdapter)
-
 }
+
+func bridgeChapter() {
+	hpPrinter := &bridge.HP{}
+	epsonPrinter := &bridge.Epson{}
+
+	macComquter := &bridge.Mac{}
+	macComquter.SetPrinter(hpPrinter)
+	macComquter.Print()
+	fmt.Println()
+
+	macComquter.SetPrinter(epsonPrinter)
+	macComquter.Print()
+	fmt.Println()
+
+	windowComputer := &bridge.Windows{}
+
+	windowComputer.SetPrinter(hpPrinter)
+	windowComputer.Print()
+	fmt.Println()
+
+	windowComputer.SetPrinter(epsonPrinter)
+	windowComputer.Print()
+	fmt.Println()
+}
+
+// tool function
 
 func printDetails(g factorymethod.IGun) {
 	fmt.Printf("Gun: %s", g.GetName())
