@@ -7,6 +7,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/adapter"
 	"github.com/buptgarden/design-pattern-go/bridge.go"
 	"github.com/buptgarden/design-pattern-go/builder"
+	"github.com/buptgarden/design-pattern-go/composite"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/singleton"
@@ -27,9 +28,35 @@ func main() {
 
 	bridgeChapter()
 
+	compositeChapter()
+
 }
 
 // chapt worker
+
+func compositeChapter() {
+	file1 := &composite.File{
+		Name: "file1",
+	}
+	file2 := &composite.File{Name: "file2"}
+	file3 := &composite.File{Name: "file3"}
+
+	folder1 := &composite.Folder{
+		Name: "folder1",
+	}
+
+	folder1.Add(file1)
+
+	folder2 := &composite.Folder{
+		Name: "folder2",
+	}
+
+	folder2.Add(file2)
+	folder2.Add(file3)
+	folder2.Add(folder1)
+
+	folder2.Search("rose")
+}
 
 func factoryMethod() {
 	ak47, _ := factorymethod.GetGun("ak47")
