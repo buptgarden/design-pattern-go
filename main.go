@@ -8,6 +8,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/bridge.go"
 	"github.com/buptgarden/design-pattern-go/builder"
 	"github.com/buptgarden/design-pattern-go/composite"
+	"github.com/buptgarden/design-pattern-go/decorator"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/singleton"
@@ -30,9 +31,26 @@ func main() {
 
 	compositeChapter()
 
+	decoratorChapter()
+
 }
 
 // chapt worker
+
+func decoratorChapter() {
+	piaaz := &decorator.VeggieMania{}
+
+	piaazWithCheese := &decorator.CheeseTopping{
+		Pizza: piaaz,
+	}
+
+	pizzaWithTomato := &decorator.TomatoTopping{
+		Pizza: piaazWithCheese,
+	}
+
+	fmt.Printf("price of veggeMania with tomato and  cheese topping is %d\n", pizzaWithTomato.GetPrice())
+
+}
 
 func compositeChapter() {
 	file1 := &composite.File{
