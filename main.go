@@ -12,6 +12,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/decorator"
 	"github.com/buptgarden/design-pattern-go/facade"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
+	"github.com/buptgarden/design-pattern-go/flyweight"
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/singleton"
 )
@@ -37,9 +38,34 @@ func main() {
 
 	facadeChapter()
 
+	flywightAdapter()
+
 }
 
 // chapt worker
+
+func flywightAdapter() {
+	game := flyweight.NewGame()
+
+	game.AddTerrorist(flyweight.TerroristDressType)
+	game.AddTerrorist(flyweight.TerroristDressType)
+	game.AddTerrorist(flyweight.TerroristDressType)
+	game.AddTerrorist(flyweight.TerroristDressType)
+	game.AddTerrorist(flyweight.TerroristDressType)
+
+	game.AddCounterTerrorist(flyweight.ConunterDressType)
+	game.AddCounterTerrorist(flyweight.ConunterDressType)
+	game.AddCounterTerrorist(flyweight.ConunterDressType)
+	game.AddCounterTerrorist(flyweight.ConunterDressType)
+	game.AddCounterTerrorist(flyweight.ConunterDressType)
+
+	dressFacotryInstanc := flyweight.GetDressFactorSingleInstance()
+
+	for dreeType, dress := range dressFacotryInstanc.DressMap {
+		fmt.Printf("DressColorType: %s\n DressColor: %s\n", dreeType, dress.GetColor())
+	}
+
+}
 
 func facadeChapter() {
 	fmt.Println()
