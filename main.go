@@ -14,6 +14,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/flyweight"
 	"github.com/buptgarden/design-pattern-go/prototype"
+	"github.com/buptgarden/design-pattern-go/proxy"
 	"github.com/buptgarden/design-pattern-go/singleton"
 )
 
@@ -40,10 +41,33 @@ func main() {
 
 	flywightAdapter()
 
+	proxyChapter()
+
 }
 
 // chapt worker
 
+func proxyChapter() {
+	nginxServer := proxy.NewNginxServer()
+
+	appStatusURL := "/app/status"
+	createruserURL := "/create/user"
+
+	httpCode, body := nginxServer.HandleRequest(appStatusURL, "GET")
+	fmt.Println("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+
+	httpCode, body = nginxServer.HandleRequest(appStatusURL, "GET")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+
+	httpCode, body = nginxServer.HandleRequest(appStatusURL, "GET")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+
+	httpCode, body = nginxServer.HandleRequest(createruserURL, "POST")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+
+	httpCode, body = nginxServer.HandleRequest(createruserURL, "GET")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+}
 func flywightAdapter() {
 	game := flyweight.NewGame()
 
