@@ -8,6 +8,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/adapter"
 	"github.com/buptgarden/design-pattern-go/bridge.go"
 	"github.com/buptgarden/design-pattern-go/builder"
+	"github.com/buptgarden/design-pattern-go/chain"
 	"github.com/buptgarden/design-pattern-go/composite"
 	"github.com/buptgarden/design-pattern-go/decorator"
 	"github.com/buptgarden/design-pattern-go/facade"
@@ -43,9 +44,31 @@ func main() {
 
 	proxyChapter()
 
+	chainChapter()
+
 }
 
 // chapt worker
+
+func chainChapter() {
+	cashier := &chain.Cashier{}
+
+	medical := &chain.Medical{}
+
+	medical.SetNext(cashier)
+
+	doctor := &chain.Doctor{}
+	doctor.SetNext(medical)
+
+	reception := &chain.Reception{}
+	reception.SetNext(doctor)
+
+	patient := &chain.Patient{
+		Name: "abc",
+	}
+
+	reception.Execute(patient)
+}
 
 func proxyChapter() {
 	nginxServer := proxy.NewNginxServer()

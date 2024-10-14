@@ -38,3 +38,6 @@ this is a design pattern implement by go language
 
 # proxy
 代理模式，对于复杂的对象，或者不容易改变的外部对象，使用代理模式，扩展他的能力。并且管理生命周期。
+
+# chain of responsibility
+责任链模式，是典型的流水线处理一个业务逻辑，并且实现流程的可插拔。实际代码中应用
