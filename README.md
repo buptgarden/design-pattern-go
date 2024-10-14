@@ -53,3 +53,6 @@ this is a design pattern implement by go language
 
 # memento
 备忘录模式，一种不用关系详细的复制的拷贝模式，原始对象自己要实现备份。然后备份的形态要统一，并且注意防止修改。
+
+# observer
+观察者模式，即发布订阅，订阅者要有统一的修改接口，发布者拥有对订阅列表的管理接口，以及通知机制。

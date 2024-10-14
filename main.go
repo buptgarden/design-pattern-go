@@ -18,6 +18,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/iterator"
 	"github.com/buptgarden/design-pattern-go/mediator"
 	"github.com/buptgarden/design-pattern-go/memento"
+	"github.com/buptgarden/design-pattern-go/observer"
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/proxy"
 	"github.com/buptgarden/design-pattern-go/singleton"
@@ -58,10 +59,23 @@ func main() {
 
 	mementoChapter()
 
+	observerChapter()
+
 }
 
 // chapt worker
 
+func observerChapter() {
+	shirtItem := observer.NewItem("Nike Shirt")
+
+	observerFirst := &observer.Customer{ID: "abc"}
+	observerSecond := &observer.Customer{ID: "xyz"}
+
+	shirtItem.Register(observerFirst)
+	shirtItem.Register(observerSecond)
+
+	shirtItem.UpdateAvailability()
+}
 func mementoChapter() {
 	caretaker := &memento.Caretake{
 		MementoArray: make([]*memento.Memento, 0),
