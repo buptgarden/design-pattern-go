@@ -22,6 +22,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/proxy"
 	"github.com/buptgarden/design-pattern-go/singleton"
+	"github.com/buptgarden/design-pattern-go/state"
 )
 
 func main() {
@@ -61,9 +62,55 @@ func main() {
 
 	observerChapter()
 
+	stateAdapter()
 }
 
 // chapt worker
+
+func stateAdapter() {
+	vendingMachine := state.NewVendingMachine(1, 10)
+
+	err := vendingMachine.RequestItem()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	fmt.Println()
+
+	err = vendingMachine.InsertMoney(10)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = vendingMachine.DispeneseItem()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	fmt.Println()
+
+	err = vendingMachine.AddItem(2)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	fmt.Println()
+
+	err = vendingMachine.RequestItem()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	err = vendingMachine.InsertMoney(10)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	err = vendingMachine.DispeneseItem()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+}
 
 func observerChapter() {
 	shirtItem := observer.NewItem("Nike Shirt")
