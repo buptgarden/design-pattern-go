@@ -16,6 +16,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/flyweight"
 	"github.com/buptgarden/design-pattern-go/iterator"
+	"github.com/buptgarden/design-pattern-go/mediator"
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/proxy"
 	"github.com/buptgarden/design-pattern-go/singleton"
@@ -52,10 +53,27 @@ func main() {
 
 	iteratorChapter()
 
+	mediatorAdaptor()
+
 }
 
 // chapt worker
 
+func mediatorAdaptor() {
+	stationManager := mediator.NewStationManager()
+	passngerTrain := &mediator.PassengerTrain{
+		Mediator: stationManager,
+	}
+
+	freightTrain := &mediator.FreightTrain{
+		Mediator: stationManager,
+	}
+
+	passngerTrain.Arrive()
+	freightTrain.Arrive()
+	passngerTrain.Depart()
+
+}
 func iteratorChapter() {
 	user1 := &iterator.User{
 		Name: "a",
