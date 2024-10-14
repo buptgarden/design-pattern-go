@@ -17,6 +17,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/flyweight"
 	"github.com/buptgarden/design-pattern-go/iterator"
 	"github.com/buptgarden/design-pattern-go/mediator"
+	"github.com/buptgarden/design-pattern-go/memento"
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/proxy"
 	"github.com/buptgarden/design-pattern-go/singleton"
@@ -55,9 +56,42 @@ func main() {
 
 	mediatorAdaptor()
 
+	mementoChapter()
+
 }
 
 // chapt worker
+
+func mementoChapter() {
+	caretaker := &memento.Caretake{
+		MementoArray: make([]*memento.Memento, 0),
+	}
+
+	originator := &memento.Originator{
+		State: "A",
+	}
+
+	printState("Originator Current State:", originator)
+	caretaker.AddMemento(originator.CreateMemento())
+
+	originator.SetState("B")
+	printState("Originator Current State:", originator)
+	caretaker.AddMemento(originator.CreateMemento())
+
+	originator.SetState("C")
+	printState("Originator Current State:", originator)
+	caretaker.AddMemento(originator.CreateMemento())
+
+	originator.RestoreMemento(caretaker.GetMemento(1))
+	printState("Restored to State:", originator)
+
+	originator.RestoreMemento(caretaker.GetMemento(0))
+	printState("Restored to State:", originator)
+}
+
+func printState(promot string, o *memento.Originator) {
+	fmt.Printf("%s %s\n", promot, o.GetState())
+}
 
 func mediatorAdaptor() {
 	stationManager := mediator.NewStationManager()
