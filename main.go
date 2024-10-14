@@ -9,6 +9,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/bridge.go"
 	"github.com/buptgarden/design-pattern-go/builder"
 	"github.com/buptgarden/design-pattern-go/chain"
+	"github.com/buptgarden/design-pattern-go/command"
 	"github.com/buptgarden/design-pattern-go/composite"
 	"github.com/buptgarden/design-pattern-go/decorator"
 	"github.com/buptgarden/design-pattern-go/facade"
@@ -46,9 +47,35 @@ func main() {
 
 	chainChapter()
 
+	commandChapter()
+
 }
 
 // chapt worker
+
+func commandChapter() {
+	tv := &command.Tv{}
+
+	onCommand := &command.OnCommand{
+		Device: tv,
+	}
+
+	offCommand := &command.OffCommand{
+		Device: tv,
+	}
+
+	onButton := &command.Button{
+		Command: onCommand,
+	}
+
+	onButton.Press()
+
+	offButtion := &command.Button{
+		Command: offCommand,
+	}
+
+	offButtion.Press()
+}
 
 func chainChapter() {
 	cashier := &chain.Cashier{}
