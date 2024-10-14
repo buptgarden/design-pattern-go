@@ -15,6 +15,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/facade"
 	"github.com/buptgarden/design-pattern-go/factorymethod"
 	"github.com/buptgarden/design-pattern-go/flyweight"
+	"github.com/buptgarden/design-pattern-go/iterator"
 	"github.com/buptgarden/design-pattern-go/prototype"
 	"github.com/buptgarden/design-pattern-go/proxy"
 	"github.com/buptgarden/design-pattern-go/singleton"
@@ -49,9 +50,34 @@ func main() {
 
 	commandChapter()
 
+	iteratorChapter()
+
 }
 
 // chapt worker
+
+func iteratorChapter() {
+	user1 := &iterator.User{
+		Name: "a",
+		Age:  12,
+	}
+
+	user2 := &iterator.User{
+		Name: "b",
+		Age:  13,
+	}
+
+	userCollection := &iterator.UserCollection{
+		Users: []*iterator.User{user1, user2},
+	}
+
+	iterator := userCollection.CreateIterator()
+
+	for iterator.HasNext() {
+		user := iterator.GetNext()
+		fmt.Printf("User is %+v\n", user)
+	}
+}
 
 func commandChapter() {
 	tv := &command.Tv{}
