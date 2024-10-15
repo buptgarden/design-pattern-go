@@ -25,6 +25,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/state"
 	"github.com/buptgarden/design-pattern-go/strategy"
 	"github.com/buptgarden/design-pattern-go/template"
+	"github.com/buptgarden/design-pattern-go/visitor"
 )
 
 func main() {
@@ -69,10 +70,32 @@ func main() {
 	strtegyChapter()
 
 	templateChapter()
+
+	visitorChapter()
 }
 
 // chapt worker
 
+func visitorChapter() {
+	square := &visitor.Square{}
+
+	rectangel := &visitor.Rectangle{}
+
+	circle := &visitor.Circle{}
+
+	areaCaldulator := visitor.AreaCalculator{}
+
+	square.Accept(&areaCaldulator)
+	circle.Accept(&areaCaldulator)
+	rectangel.Accept(&areaCaldulator)
+
+	fmt.Println()
+	middleCoordinates := &visitor.MiddleCoordinates{}
+
+	square.Accept(middleCoordinates)
+	circle.Accept(middleCoordinates)
+	rectangel.Accept(middleCoordinates)
+}
 func templateChapter() {
 	smsOTP := &template.Sms{}
 	o := template.Otp{
