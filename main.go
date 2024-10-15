@@ -24,6 +24,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/singleton"
 	"github.com/buptgarden/design-pattern-go/state"
 	"github.com/buptgarden/design-pattern-go/strategy"
+	"github.com/buptgarden/design-pattern-go/template"
 )
 
 func main() {
@@ -66,9 +67,27 @@ func main() {
 	stateAdapter()
 
 	strtegyChapter()
+
+	templateChapter()
 }
 
 // chapt worker
+
+func templateChapter() {
+	smsOTP := &template.Sms{}
+	o := template.Otp{
+		Iotp: smsOTP,
+	}
+
+	o.GenAndSendOTP(4)
+
+	fmt.Println("")
+	emailOTP := &template.Email{}
+	o = template.Otp{
+		Iotp: emailOTP,
+	}
+	o.GenAndSendOTP(4)
+}
 
 func strtegyChapter() {
 	lfu := &strategy.Lfu{}
