@@ -59,3 +59,6 @@ this is a design pattern implement by go language
 
 # state
 状态模式， 在计算机中有限状态自动机是经常用到的。但是复杂的状态切换和判断，会导致代码的腐坏。所以可以将每一状态做成一个类，然后状态类在指定的操作里互相转化。
+
+# strtegy
+策略模式，针对具体算法的抽象。

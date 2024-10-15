@@ -23,6 +23,7 @@ import (
 	"github.com/buptgarden/design-pattern-go/proxy"
 	"github.com/buptgarden/design-pattern-go/singleton"
 	"github.com/buptgarden/design-pattern-go/state"
+	"github.com/buptgarden/design-pattern-go/strategy"
 )
 
 func main() {
@@ -63,9 +64,31 @@ func main() {
 	observerChapter()
 
 	stateAdapter()
+
+	strtegyChapter()
 }
 
 // chapt worker
+
+func strtegyChapter() {
+	lfu := &strategy.Lfu{}
+
+	cache := strategy.InitCache(lfu)
+
+	cache.Add("a", "1")
+	cache.Add("b", "2")
+	cache.Add("c", "3")
+
+	lru := &strategy.Lru{}
+	cache.SetEvictionAlgo(lru)
+
+	cache.Add("d", "4")
+
+	fifo := &strategy.Fifo{}
+	cache.SetEvictionAlgo(fifo)
+
+	cache.Add("e", "5")
+}
 
 func stateAdapter() {
 	vendingMachine := state.NewVendingMachine(1, 10)
